@@ -345,3 +345,12 @@ func (p *PaneMap) OnMapSizeChange() {
 	p.reloadCanvas()
 	p.pSettings.DropSessionMapSize()
 }
+
+func (p *PaneMap) doRotateClockwise() {
+	p.editor.TileRotateSelected(true)
+}
+
+func (p *PaneMap) doRotateCounterClockwise() {
+	p.editor.TileRotateSelected(false)
+}
+
