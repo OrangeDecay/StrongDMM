@@ -354,3 +354,10 @@ func (p *PaneMap) doRotateCounterClockwise() {
 	p.editor.TileRotateSelected(false)
 }
 
+func (p *PaneMap) doMirrorHorizontal() {
+	p.editor.TileMirrorSelected(true)
+}
+
+func (p *PaneMap) doMirrorVertical() {
+	p.editor.TileMirrorSelected(false)
+}
