@@ -54,6 +54,18 @@ func (p *PaneMap) addShortcuts() {
 		FirstKey: glfw.KeyQ,
 		Action:   p.doRotateCounterClockwise,
 	})
+
+	p.shortcuts.Add(shortcut.Shortcut{
+		Name:     "pmap#doMirrorHorizontal",
+		FirstKey: glfw.KeyH,
+		Action:   p.doMirrorHorizontal,
+	})
+
+	p.shortcuts.Add(shortcut.Shortcut{
+		Name:     "pmap#doMirrorVertical",
+		FirstKey: glfw.KeyV,
+		Action:   p.doMirrorVertical,
+	})
 	
 	p.shortcuts.Add(shortcut.Shortcut{
 		Name:         "pmap#doToggleArea",
