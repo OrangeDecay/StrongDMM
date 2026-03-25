@@ -44,6 +44,18 @@ func (p *PaneMap) addShortcuts() {
 	})
 
 	p.shortcuts.Add(shortcut.Shortcut{
+		Name:     "pmap#doRotateClockwise",
+		FirstKey: glfw.KeyE,
+		Action:   p.doRotateClockwise,
+	})
+
+	p.shortcuts.Add(shortcut.Shortcut{
+		Name:     "pmap#doRotateCounterClockwise",
+		FirstKey: glfw.KeyQ,
+		Action:   p.doRotateCounterClockwise,
+	})
+	
+	p.shortcuts.Add(shortcut.Shortcut{
 		Name:         "pmap#doToggleArea",
 		FirstKey:     platform.KeyModLeft(),
 		FirstKeyAlt:  platform.KeyModRight(),
