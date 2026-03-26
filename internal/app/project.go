@@ -118,7 +118,8 @@ func (a *app) forceLoadEnvironment(path string, callback func()) {
 		a.projectConfig().AddProject(path)
 		a.loadedEnvironment = env
 		a.pathsFilter = newPathsFilter(env)
-
+		a.applyCustomFiltersFromConfig()
+		
 		dmicon.Cache.SetRootDirPath(env.RootDir)
 		dmmap.Init(env)
 
