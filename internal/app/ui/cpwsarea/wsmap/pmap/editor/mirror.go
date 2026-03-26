@@ -85,18 +85,6 @@ func (e *Editor) TileMirrorSelected(horizontal bool) {
 		tilesToPaste[newPos] = append(tilesToPaste[newPos], mirroredPrefabs...)
 	}
 
-	// 3. Paste them into their new locations
-	for pos, prefabs := range tilesToPaste {
-		if !e.Dmm().HasTile(pos) {
-			continue
-		}
-		tile := e.Dmm().GetTile(pos)
-		for _, prefab := range prefabs {
-			tile.InstancesAdd(prefab)
-		}
-		tile.InstancesRegenerate()
-	}
-
 	// Select grab tool and reset its selection
 	toolSelect, ok := tools.SetSelected(tools.TNGrab).(*tools.ToolGrab)
 	if ok {
@@ -110,6 +98,21 @@ func (e *Editor) TileMirrorSelected(horizontal bool) {
 				}
 			}
 		}
+
+		toolSelect.PreSelectArea(tilesToSelect)
+
+		// 3. Paste them into their new locations
+		for pos, prefabs := range tilesToPaste {
+			if !e.Dmm().HasTile(pos) {
+				continue
+			}
+			tile := e.Dmm().GetTile(pos)
+			for _, prefab := range prefabs {
+				tile.InstancesAdd(prefab)
+			}
+			tile.InstancesRegenerate()
+		}
+
 		toolSelect.SelectArea(tilesToSelect)
 	}
 
