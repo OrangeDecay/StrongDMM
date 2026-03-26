@@ -103,14 +103,9 @@ func (e *Editor) TileRotateSelected(clockwise bool) {
 		
 		// 3. Paste them into their new locations
 		for pos, prefabs := range tilesToPaste {
-			if !e.Dmm().HasTile(pos) {
-				continue
+			if e.Dmm().HasTile(pos) {
+				e.TileReplace(pos, prefabs)
 			}
-			tile := e.Dmm().GetTile(pos)
-			for _, prefab := range prefabs {
-				tile.InstancesAdd(prefab)
-			}
-			tile.InstancesRegenerate()
 		}
 
 		toolSelect.SelectArea(tilesToSelect)
