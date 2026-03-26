@@ -107,6 +107,7 @@ func (a *app) initialize() {
 	a.loadConfig()
 	a.loadProjectConfig()
 	a.loadPreferencesConfig()
+	a.loadTypeFiltersConfig()
 
 	a.runBackgroundConfigSave()
 
