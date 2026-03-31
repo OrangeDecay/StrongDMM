@@ -50,12 +50,15 @@ func (m *Menu) openAddFilterPopup() {
 	m.addFilterName = ""
 	m.addFilterPathInput = ""
 	m.addFilterPaths = nil
-	imgui.OpenPopup(addFilterPopupID)
 }
 
 func (m *Menu) processAddFilterPopup() {
 	if !m.addFilterOpen {
 		return
+	}
+
+	if !imgui.IsPopupOpen(addFilterPopupID) {
+		imgui.OpenPopup(addFilterPopupID)
 	}
 
 	imgui.SetNextWindowSize(imgui.Vec2{X: 380, Y: 0})
