@@ -44,44 +44,44 @@ func (p *Panel) showMapSize() {
 		imgui.AlignTextToFramePadding()
 		imgui.Text("X")
 		imgui.SameLine()
+		imgui.SetNextItemWidth(-1)
+		imguiext.InputIntClamp("##max_x", &p.sessionMapSize.maxX, 1, possibleMaxX, 1, 10)
+
 		anchorXText := "Anchor: Left"
 		if p.sessionMapSize.anchorRight {
 			anchorXText = "Anchor: Right"
 		}
 		w.Button(anchorXText, func() {
 			p.sessionMapSize.anchorRight = !p.sessionMapSize.anchorRight
-		}).Size(imgui.Vec2{X: 100}).Build()
-		imgui.SameLine()
-		imgui.SetNextItemWidth(-1)
-		imguiext.InputIntClamp("##max_x", &p.sessionMapSize.maxX, 1, possibleMaxX, 1, 10)
+		}).Size(imgui.Vec2{X: -1}).Build()
 
 		imgui.AlignTextToFramePadding()
 		imgui.Text("Y")
 		imgui.SameLine()
+		imgui.SetNextItemWidth(-1)
+		imguiext.InputIntClamp("##max_y", &p.sessionMapSize.maxY, 1, possibleMaxY, 1, 10)
+
 		anchorYText := "Anchor: Bottom"
 		if p.sessionMapSize.anchorTop {
 			anchorYText = "Anchor: Top"
 		}
 		w.Button(anchorYText, func() {
 			p.sessionMapSize.anchorTop = !p.sessionMapSize.anchorTop
-		}).Size(imgui.Vec2{X: 100}).Build()
-		imgui.SameLine()
-		imgui.SetNextItemWidth(-1)
-		imguiext.InputIntClamp("##max_y", &p.sessionMapSize.maxY, 1, possibleMaxY, 1, 10)
+		}).Size(imgui.Vec2{X: -1}).Build()
 
 		imgui.AlignTextToFramePadding()
 		imgui.Text("Z")
 		imgui.SameLine()
+		imgui.SetNextItemWidth(-1)
+		imguiext.InputIntClamp("##max_z", &p.sessionMapSize.maxZ, 1, possibleMaxZ, 1, 10)
+
 		anchorZText := "Anchor: Under"
 		if p.sessionMapSize.anchorAbove {
 			anchorZText = "Anchor: Above"
 		}
 		w.Button(anchorZText, func() {
 			p.sessionMapSize.anchorAbove = !p.sessionMapSize.anchorAbove
-		}).Size(imgui.Vec2{X: 100}).Build()
-		imgui.SameLine()
-		imgui.SetNextItemWidth(-1)
-		imguiext.InputIntClamp("##max_z", &p.sessionMapSize.maxZ, 1, possibleMaxZ, 1, 10)
+		}).Size(imgui.Vec2{X: -1}).Build()
 
 		imgui.Separator()
 
