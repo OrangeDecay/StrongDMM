@@ -18,6 +18,15 @@ func (m *Menu) showCustomFilters() {
 	filters := m.app.PathsFilter().CustomFilters
 
 	for i, f := range filters {
+		// [×] delete button — placed before selectable to avoid click absorption.
+		delLabel := fmt.Sprintf("%s##del_custom_filter_%d", "×", i)
+		if imgui.SmallButton(delLabel) {
+			m.app.DoRemoveCustomFilter(i)
+			break // slice changed; safe to break and re-render next frame
+		}
+		
+		imgui.SameLine()
+
 		// Selectable acts as the toggle checkbox.
 		selected := !f.Hidden
 		label := fmt.Sprintf("%s##custom_filter_%d", f.Name, i)
@@ -29,13 +38,6 @@ func (m *Menu) showCustomFilters() {
 			imgui.BeginTooltip()
 			imgui.Text("Paths:\n" + strings.Join(f.Paths, "\n"))
 			imgui.EndTooltip()
-		}
-		imgui.SameLine()
-		// [×] delete button — placed at the right margin.
-		delLabel := fmt.Sprintf("%s##del_custom_filter_%d", "×", i)
-		if imgui.SmallButton(delLabel) {
-			m.app.DoRemoveCustomFilter(i)
-			break // slice changed; safe to break and re-render next frame
 		}
 	}
 
