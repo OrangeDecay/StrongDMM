@@ -17,6 +17,10 @@ func (i *Instance) SetPrefab(prefab *dmmprefab.Prefab) {
 	i.prefab = prefab
 }
 
+func (i *Instance) SetCoord(coord util.Point) {
+	i.coord = coord
+}
+
 func (i Instance) Copy() Instance {
 	return Instance{
 		id:     i.id,
@@ -45,3 +49,4 @@ func New(coord util.Point, prefab *dmmprefab.Prefab) *Instance {
 		prefab,
 	}
 }
+
