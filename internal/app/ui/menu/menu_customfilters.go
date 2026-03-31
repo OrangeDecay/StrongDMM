@@ -43,9 +43,6 @@ func (m *Menu) showCustomFilters() {
 	if imgui.MenuItemV("Add Custom Filter...", "", false, true) {
 		m.openAddFilterPopup()
 	}
-
-	// Render the popup modal (must be called every frame).
-	m.processAddFilterPopup()
 }
 
 func (m *Menu) openAddFilterPopup() {
