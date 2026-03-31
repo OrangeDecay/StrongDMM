@@ -6,18 +6,20 @@ import (
 	"sdmm/internal/util"
 )
 
-func (e *Editor) CommitMapSizeChange(oldMaxX, oldMaxY, oldMaxZ int) {
+func (e *Editor) CommitMapSizeChange(oldMaxX, oldMaxY, oldMaxZ int, shiftX, shiftY, shiftZ int) {
 	initialMapTiles := e.pMap.Snapshot().Initial().Copy().Tiles // Remember initial tiles to restore them on undo.
 	newMaxX, newMaxY, newMaxZ := e.dmm.MaxX, e.dmm.MaxY, e.dmm.MaxZ
 
 	e.onMapSizeChange(e.dmm.MaxZ)
 
 	e.app.CommandStorage().Push(command.Make("Set Map Size", func() {
-		e.dmm.SetMapSize(oldMaxX, oldMaxY, oldMaxZ)
+		e.dmm.MaxX = oldMaxX
+		e.dmm.MaxY = oldMaxY
+		e.dmm.MaxZ = oldMaxZ
 		e.dmm.Tiles = initialMapTiles
 		e.onMapSizeChange(oldMaxZ)
 	}, func() {
-		e.dmm.SetMapSize(newMaxX, newMaxY, newMaxZ)
+		e.dmm.SetMapSize(newMaxX, newMaxY, newMaxZ, shiftX, shiftY, shiftZ)
 		e.onMapSizeChange(newMaxZ)
 	}))
 }
