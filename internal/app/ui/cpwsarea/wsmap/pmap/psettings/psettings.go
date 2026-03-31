@@ -19,7 +19,7 @@ type editor interface {
 	ActiveLevel() int
 
 	Dmm() *dmmap.Dmm
-	CommitMapSizeChange(oldMaxX, oldMaxY, oldMaxZ int)
+	CommitMapSizeChange(oldMaxX, oldMaxY, oldMaxZ, shiftX, shiftY, shiftZ int)
 }
 
 type Panel struct {
