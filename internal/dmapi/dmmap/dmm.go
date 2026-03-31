@@ -64,7 +64,7 @@ func (d *Dmm) IsInstanceExist(instanceId uint64) bool {
 	return false
 }
 
-func (d *Dmm) SetMapSize(maxX, maxY, maxZ int) {
+func (d *Dmm) SetMapSize(maxX, maxY, maxZ int, shiftX, shiftY, shiftZ int) {
 	newTiles := make([]*Tile, maxX*maxY*maxZ)
 
 	for z := 1; z <= maxZ; z++ {
@@ -72,8 +72,15 @@ func (d *Dmm) SetMapSize(maxX, maxY, maxZ int) {
 			for x := 1; x <= maxX; x++ {
 				coord := util.Point{X: x, Y: y, Z: z}
 				tileIndex := tileIndex(maxX, maxY, x, y, z)
-				if d.HasTile(coord) {
-					newTiles[tileIndex] = d.GetTile(util.Point{X: x, Y: y, Z: z})
+				
+				oldCoord := util.Point{X: x - shiftX, Y: y - shiftY, Z: z - shiftZ}
+				if d.HasTile(oldCoord) {
+					tile := d.GetTile(oldCoord)
+					tile.Coord = coord
+					for _, instance := range tile.Instances() {
+						instance.SetCoord(coord)
+					}
+					newTiles[tileIndex] = tile
 				} else {
 					// Fill an empty tile with basic prefabs.
 					newTiles[tileIndex] = &Tile{
