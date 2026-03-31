@@ -46,6 +46,9 @@ type app interface {
 	DoAreaBorders()
 	DoMultiZRendering()
 	DoMirrorCanvasCamera()
+	DoAddCustomFilter(name string, paths []string)
+	DoRemoveCustomFilter(idx int)
+	DoToggleCustomFilter(idx int)
 
 	// Window
 	DoResetLayout()
@@ -100,6 +103,12 @@ type Menu struct {
 	updateStatus      upStatus
 	updateVersion     string
 	updateDescription string
+
+	// State for the "Add Custom Filter" popup.
+	addFilterOpen      bool
+	addFilterName      string
+	addFilterPathInput string
+	addFilterPaths     []string
 }
 
 func New(app app) *Menu {
@@ -235,6 +244,10 @@ func (m *Menu) Process() {
 			w.MenuItem("Mirror Canvas Camera", m.app.DoMirrorCanvasCamera).
 				IconEmpty().
 				Selected(m.app.MirrorCanvasCamera()),
+			w.Separator(),
+			w.Custom(func() {
+				m.showCustomFilters()
+			}),
 		}),
 
 		w.Menu("Window", w.Layout{
