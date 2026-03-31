@@ -333,6 +333,26 @@ func (a *app) DoMirrorCanvasCamera() {
 	log.Print("do mirror canvas camera:", pmap.MirrorCanvasCamera)
 }
 
+// DoAddCustomFilter creates a new named custom type filter and saves it to config.
+func (a *app) DoAddCustomFilter(name string, paths []string) {
+	log.Printf("do add custom filter: name=[%s] paths=%v", name, paths)
+	a.pathsFilter.AddCustomFilter(name, paths)
+	a.saveCustomFiltersToConfig()
+}
+
+// DoRemoveCustomFilter removes the custom filter at the given index and saves to config.
+func (a *app) DoRemoveCustomFilter(idx int) {
+	log.Printf("do remove custom filter idx=%d", idx)
+	a.pathsFilter.RemoveCustomFilter(idx)
+	a.saveCustomFiltersToConfig()
+}
+
+// DoToggleCustomFilter toggles visibility for the custom filter at the given index.
+func (a *app) DoToggleCustomFilter(idx int) {
+	log.Printf("do toggle custom filter idx=%d", idx)
+	a.pathsFilter.ToggleCustomFilter(idx)
+}
+
 // DoSelfUpdate starts the process of a self update.
 func (a *app) DoSelfUpdate() {
 	log.Print("do self update")
