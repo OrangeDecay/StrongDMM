@@ -281,6 +281,8 @@ func (m *Menu) Process() {
 			}
 		}),
 	}).Build()
+
+	m.processAddFilterPopup()
 }
 
 func (m *Menu) SetUpdateAvailable(version, description string) {
